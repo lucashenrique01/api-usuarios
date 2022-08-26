@@ -106,5 +106,19 @@ public class UsuarioPacienteController implements AcoesUsuarios {
         acoesCrud.save(usuarioPaciente);
         return ResponseEntity.status(200).build();
     }
+    @PatchMapping("/experiencia/{idPaciente}/")
+    public ResponseEntity patchExperiencia(@PathVariable int idPaciente,
+                                           @PathVariable Double valor){
+        UsuarioPaciente usuarioPaciente = acoesCrud.findById(idPaciente);
+        if(Objects.isNull(usuarioPaciente)){
+            return ResponseEntity.status(404).build();
+        }
+        usuarioPaciente.setExperiencia(valor);
+        usuarioPaciente.alocaCategoria();
+        acoesCrud.save(usuarioPaciente);
+        return ResponseEntity.status(200).build();
+    }
+
+
 
 }

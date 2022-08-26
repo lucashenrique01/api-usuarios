@@ -42,6 +42,24 @@ public abstract class Usuario{
     @Transient
     private int nAvaliacoes;
     private String foto;
+    private Double experiencia;
+    private String categoria;
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public Double getExperiencia() {
+        return experiencia;
+    }
+
+    public void setExperiencia(Double experiencia) {
+        this.experiencia = experiencia;
+    }
 
     public String getSenhaUsuario() {
         return senhaUsuario;
@@ -138,6 +156,23 @@ public abstract class Usuario{
             this.avaliacao = avaliacao;
         }
         this.avaliacao += avaliacao;
+    }
+
+    public void alocaCategoria(){
+        if(this.experiencia <= 100.0 || this.experiencia == 0){
+            setCategoria("Sem Classificação");
+        } else if(this.experiencia >= 100.0 && this.experiencia < 300.0){
+            setCategoria("Bronze");
+        } else if (this.experiencia >= 300.0 && this.experiencia < 500.0){
+            setCategoria("Prata");
+        } else if(this.experiencia >= 500.0 && this.experiencia < 700.0){
+            setCategoria("Ouro");
+        } else if(this.experiencia >= 500.0 && this.experiencia < 1000.0){
+            setCategoria("Platina");
+        } else {
+            setCategoria("Diamante");
+        }
+
     }
 
     public void calculaAvaliacao(){
