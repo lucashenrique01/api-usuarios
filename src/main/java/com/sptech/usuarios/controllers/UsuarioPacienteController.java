@@ -14,9 +14,9 @@ import java.lang.annotation.Repeatable;
 import java.util.Objects;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/pacientes")
-public class UsuarioPacienteController implements AcoesUsuarios {
+public class UsuarioPacienteController {
 
     @Autowired
     private UsuarioPacienteRepositorio acoesCrud;
@@ -32,16 +32,18 @@ public class UsuarioPacienteController implements AcoesUsuarios {
         return ResponseEntity.status(201).build();
     }
 
-    @GetMapping("{usuario}/{senha}")
-    public ResponseEntity autenticarUsuario(@PathVariable String usuario, @PathVariable String senha){
-        UsuarioPaciente usuarioAtual = acoesCrud.findByEmailUsuario(usuario);
+    @PostMapping ("/autenticar")
+    public ResponseEntity autenticarUsuario(@RequestBody UsuarioPaciente usuarioPaciente){
+        String email = usuarioPaciente.getEmailUsuario();
+        String pass = usuarioPaciente.getSenhaUsuario();
+        UsuarioPaciente usuarioAtual = acoesCrud.findByEmailUsuario(email);
         if(Objects.isNull(usuarioAtual)){
             return ResponseEntity.status(403).build(); //não achou o usuario
         }else {
-            if(usuarioAtual.autenticar(usuario, senha)){
+            if(usuarioAtual.autenticar(email, pass)){
                 usuarioAtual.setAutenticado(true);
                 acoesCrud.save(usuarioAtual);
-                return ResponseEntity.status(200).build();
+                return ResponseEntity.status(200).body(usuarioAtual);
             }
             return ResponseEntity.status(403).build(); //senha incorreta
         }
