@@ -1,5 +1,6 @@
 package com.sptech.usuarios.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -18,7 +19,7 @@ public abstract class Usuario{
    @Size(min = 4, max = 30)
     //@JsonProperty("nomeUsuario")
     private String nomeUsuario;
-   @Pattern(regexp = "(\\(?\\d{2}\\)?\\s)?(\\d{4,5}\\-\\d{4})"
+       @Pattern(regexp = "(\\(?\\d{2}\\)?\\s)?(\\d{4,5}\\-\\d{4})"
            , message = "Informe um telefone válido com ou sem DDD")
     //@JsonProperty("telefoneUsuario")
     private String telefoneUsuario;
@@ -27,6 +28,7 @@ public abstract class Usuario{
     private String emailUsuario;
     @NotBlank
     @Size(min = 4, max = 15)
+
     //@JsonProperty("senhaUsuario")
     private String senhaUsuario;
     @NotNull

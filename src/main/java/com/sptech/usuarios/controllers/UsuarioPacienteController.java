@@ -22,25 +22,23 @@ public class UsuarioPacienteController {
     private UsuarioPacienteRepositorio acoesCrud;
 
     @PostMapping
-    public ResponseEntity cadastrarUsuario(@RequestBody String novoUsuario) throws JsonProcessingException {
-        ObjectMapper obj = new ObjectMapper();
-        UsuarioPaciente user = obj.readValue(novoUsuario, UsuarioPaciente.class);
+    public ResponseEntity cadastrarUsuario(@RequestBody @Valid UsuarioPaciente novoUsuario) {
         if(Objects.isNull(novoUsuario)){
-           return ResponseEntity.status(400).build();
+            return ResponseEntity.status(400).build();
         }
-        acoesCrud.save(user);
+        novoUsuario.setAutenticado(false);
+        acoesCrud.save(novoUsuario);
         return ResponseEntity.status(201).build();
     }
 
-    @PostMapping ("/autenticar")
-    public ResponseEntity autenticarUsuario(@RequestBody UsuarioPaciente usuarioPaciente){
-        String email = usuarioPaciente.getEmailUsuario();
-        String pass = usuarioPaciente.getSenhaUsuario();
-        UsuarioPaciente usuarioAtual = acoesCrud.findByEmailUsuario(email);
+    @PostMapping ("/autenticar/{usuario}/{senha}")
+    public ResponseEntity autenticarUsuario(@PathVariable String usuario, @PathVariable String senha){
+
+        UsuarioPaciente usuarioAtual = acoesCrud.findByEmailUsuario(usuario);
         if(Objects.isNull(usuarioAtual)){
             return ResponseEntity.status(403).build(); //não achou o usuario
         }else {
-            if(usuarioAtual.autenticar(email, pass)){
+            if(usuarioAtual.autenticar(usuario, senha)){
                 usuarioAtual.setAutenticado(true);
                 acoesCrud.save(usuarioAtual);
                 return ResponseEntity.status(200).body(usuarioAtual);
@@ -58,7 +56,7 @@ public class UsuarioPacienteController {
         }
     }
 
-    @DeleteMapping("{usuario}")
+    @DeleteMapping("/{usuario}")
     public ResponseEntity logoffUsuario(@PathVariable String usuario){
         UsuarioPaciente usuarioAtual = acoesCrud.findByEmailUsuario(usuario);
         if(!Objects.isNull(usuarioAtual)){

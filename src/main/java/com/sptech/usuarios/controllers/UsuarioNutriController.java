@@ -10,7 +10,7 @@ import javax.validation.Valid;
 import java.util.Objects;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RequestMapping("/nutricionistas")
 public class UsuarioNutriController implements AcoesUsuarios {
 
@@ -34,11 +34,10 @@ public class UsuarioNutriController implements AcoesUsuarios {
         }
         novoUsuario.setAutenticado(false);
         acoesCrud.save(novoUsuario);
-        String nomeNovoUsuario = novoUsuario.getNomeUsuario();
         return ResponseEntity.status(201).build();
     }
 
-    @PostMapping("{usuario}/{senha}")
+    @PostMapping("/autenticar/{usuario}/{senha}")
     public ResponseEntity autenticarUsuario(@PathVariable String usuario, @PathVariable String senha){
         UsuarioNutri usuarioAtual = acoesCrud.findByEmailUsuario(usuario);
         if(Objects.isNull(usuarioAtual)){
@@ -47,7 +46,7 @@ public class UsuarioNutriController implements AcoesUsuarios {
             if(usuarioAtual.autenticar(usuario, senha)){
                 usuarioAtual.setAutenticado(true);
                 acoesCrud.save(usuarioAtual);
-                return ResponseEntity.status(200).build();
+                return ResponseEntity.status(200).body(usuarioAtual);
             }
             return ResponseEntity.status(403).build(); //Senha incorreta
         }
