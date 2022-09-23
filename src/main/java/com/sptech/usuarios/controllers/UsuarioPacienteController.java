@@ -14,7 +14,7 @@ import java.lang.annotation.Repeatable;
 import java.util.Objects;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/pacientes")
 public class UsuarioPacienteController {
 
