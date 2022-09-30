@@ -45,19 +45,11 @@ public class EnderecoService {
         }
     }
 
-    public void postPaci(Integer idUsuario, String cep, String complemento, int numero){
+    public void postPaci(Integer idUsuario, Endereco endereco){
         Optional<UsuarioPaciente> user = paciRep.findById(idUsuario);
         if(user.isPresent()){
-            CepResposta cepEncontrado = clienteViaCep.getCep(cep);
-            Endereco novoEndereco = new Endereco();
-            novoEndereco.setBairro(cepEncontrado.getBairro());
-            novoEndereco.setCidade(cepEncontrado.getLocalidade());
-            novoEndereco.setLogradouro(cepEncontrado.getLogradouro());
-            novoEndereco.setEstado(cepEncontrado.getUf());
-            novoEndereco.setComplemento(complemento);
-            novoEndereco.setNumero(numero);
-            enderecoRepositorio.save(novoEndereco);
-            user.get().setEndereco(novoEndereco);
+            enderecoRepositorio.save(endereco);
+            user.get().setEndereco(endereco);
             paciRep.save(user.get());
         }
     }

@@ -43,9 +43,17 @@ public abstract class Usuario{
     private Endereco endereco;
     @Transient
     private int nAvaliacoes;
+    private String dataNascimento;
     private String foto;
     private Double experiencia;
     private String categoria;
+    public String getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
 
     public String getCategoria() {
         return categoria;

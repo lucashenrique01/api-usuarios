@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/enderecos")
 public class EnderecoController {
 
@@ -17,12 +18,10 @@ public class EnderecoController {
     @Autowired
     private EnderecoService enderecoService;
 
-    @PostMapping("/pacientes/{idUsuario}/{cep}/{complemento}/{numero}")
+    @PostMapping("/pacientes/{idUsuario}")
     public ResponseEntity postEnderecoPaciente(@PathVariable Integer idUsuario,
-                                               @PathVariable String cep,
-                                               @PathVariable String complemento,
-                                               @PathVariable int numero){
-        enderecoService.postPaci(idUsuario,cep, complemento, numero);
+                                               @RequestBody Endereco endereco){
+        enderecoService.postPaci(idUsuario,endereco);
         return ResponseEntity.status(201).build();
     }
 
