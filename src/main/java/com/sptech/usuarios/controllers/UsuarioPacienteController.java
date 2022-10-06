@@ -2,6 +2,7 @@ package com.sptech.usuarios.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sptech.usuarios.dto.UsuarioPaciAtualizaFicha;
 import com.sptech.usuarios.models.Usuario;
 import com.sptech.usuarios.repositorys.UsuarioPacienteRepositorio;
 import com.sptech.usuarios.models.UsuarioPaciente;
@@ -117,6 +118,20 @@ public class UsuarioPacienteController {
         usuarioPaciente.alocaCategoria();
         acoesCrud.save(usuarioPaciente);
         return ResponseEntity.status(200).build();
+    }
+
+    @PatchMapping("/atualiza-ficha/{idPaciente}/")
+    public ResponseEntity patchDados(@PathVariable int idPaciente,
+                                     @RequestBody @Valid UsuarioPaciAtualizaFicha usuarioPaciAtualizaFicha){
+        UsuarioPaciente usuarioPaciente = acoesCrud.findById(idPaciente);
+        if(Objects.isNull(usuarioPaciente)){
+            return ResponseEntity.status(404).build();
+        }
+        usuarioPaciente.setEmailUsuario(usuarioPaciAtualizaFicha.getEmailUsuario());
+        usuarioPaciente.setTelefoneUsuario(usuarioPaciAtualizaFicha.getTelefoneUsuario());
+        usuarioPaciente.setDataNascimento(usuarioPaciAtualizaFicha.getDataNascimento());
+        acoesCrud.save(usuarioPaciente);
+        return ResponseEntity.status(200).body(usuarioPaciente);
     }
 
 
