@@ -9,7 +9,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "tb_usuarios")
-@DiscriminatorColumn(name="tipoConta")
 public abstract class Usuario{
 
     @Id
@@ -19,8 +18,8 @@ public abstract class Usuario{
    @Size(min = 4, max = 30)
     //@JsonProperty("nomeUsuario")
     private String nomeUsuario;
-       @Pattern(regexp = "(\\(?\\d{2}\\)?\\s)?(\\d{4,5}\\-\\d{4})"
-           , message = "Informe um telefone válido com ou sem DDD")
+//       @Pattern(regexp = "([0-9]{2,3})?(\\([0-9]{2}\\))([0-9]{4,5})([0-9]{4})"
+//           , message = "Informe um telefone válido com ou sem DDD")
     //@JsonProperty("telefoneUsuario")
     private String telefoneUsuario;
     @Email
@@ -47,6 +46,7 @@ public abstract class Usuario{
     private String foto;
     private Double experiencia;
     private String categoria;
+    private char tipo;
     public String getDataNascimento() {
         return dataNascimento;
     }
@@ -159,6 +159,14 @@ public abstract class Usuario{
 
     public Double getAvaliacao() {
         return this.avaliacao;
+    }
+
+    public char getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(char tipoConta) {
+        this.tipo = tipoConta;
     }
 
     public void setAvaliacao(Double avaliacao) {

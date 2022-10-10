@@ -50,7 +50,6 @@ public class UsuarioNutriController implements AcoesUsuarios {
             }
             return ResponseEntity.status(403).build();
         }
-
     }
 
 

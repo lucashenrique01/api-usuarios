@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/enderecos")
@@ -20,17 +22,15 @@ public class EnderecoController {
 
     @PostMapping("/pacientes/{idUsuario}")
     public ResponseEntity postEnderecoPaciente(@PathVariable Integer idUsuario,
-                                               @RequestBody Endereco endereco){
+                                               @RequestBody @Valid Endereco endereco){
         enderecoService.postPaci(idUsuario,endereco);
         return ResponseEntity.status(201).build();
     }
 
-    @PostMapping("/nutri/{idUsuario}/{cep}/{complemento}/{numero}")
+    @PostMapping("/nutri/{idUsuario}")
     public ResponseEntity postEnderecoNutri(@PathVariable Integer idUsuario,
-                                       @PathVariable String cep,
-                                       @PathVariable String complemento,
-                                       @PathVariable int numero){
-        enderecoService.postNutri(idUsuario,cep, complemento, numero);
+                                       @RequestBody @Valid Endereco endereco){
+        enderecoService.postNutri(idUsuario, endereco);
         return ResponseEntity.status(201).build();
     }
 }
