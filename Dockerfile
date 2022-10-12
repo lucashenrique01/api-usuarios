@@ -13,4 +13,4 @@ EXPOSE 8080
 COPY --from=build /api-usuarios/target/usuarios-0.0.1-SNAPSHOT.jar api-usuarios.jar
 
 # Run the jar file
-ENTRYPOINT ["java","-jar","api-signature-doc.jar"]
+ENTRYPOINT ["java","-jar","api-usuarios.jar"]
