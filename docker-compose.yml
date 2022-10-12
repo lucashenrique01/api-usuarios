@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_signature
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 5623
+      MYSQL_DATABASE: nutrion
+
+  api-usuarios:
+    build: .
+    depends_on:
+      - db
+    container_name: usuarios
+    hostname: usuarios
