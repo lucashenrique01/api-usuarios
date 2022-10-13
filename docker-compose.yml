@@ -4,7 +4,8 @@ services:
 
   db:
     image: mysql:8.0
-    container_name: mysql_signature
+    container_name: mysql_nutrion
+    hostname: mysql_nutrion
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 5623
@@ -16,3 +17,5 @@ services:
       - db
     container_name: usuarios
     hostname: usuarios
+    ports:
+      - 8010:8010
