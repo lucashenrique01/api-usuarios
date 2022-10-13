@@ -7,8 +7,8 @@ RUN mvn clean package spring-boot:repackage
 # Start with a base image containing Java runtime
 FROM openjdk:11
 
-# Make port 8080 available to the world outside this container
-EXPOSE 8080
+# Make port 8010 available to the world outside this container
+EXPOSE 8010
 
 COPY --from=build /api-usuarios/target/usuarios-0.0.1-SNAPSHOT.jar api-usuarios.jar
 

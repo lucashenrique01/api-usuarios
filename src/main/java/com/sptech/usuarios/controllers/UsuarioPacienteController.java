@@ -1,9 +1,7 @@
 package com.sptech.usuarios.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.sptech.usuarios.dto.UsuarioPaciAtualizaFicha;
-import com.sptech.usuarios.models.Usuario;
 import com.sptech.usuarios.repositorys.UsuarioPacienteRepositorio;
 import com.sptech.usuarios.models.UsuarioPaciente;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.lang.annotation.Repeatable;
 import java.util.Objects;
 
 @RestController
