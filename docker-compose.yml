@@ -18,4 +18,4 @@ services:
     container_name: usuarios
     hostname: usuarios
     ports:
-      - 8010:8010
+      - 8080:8080
