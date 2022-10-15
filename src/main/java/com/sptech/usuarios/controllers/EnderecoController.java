@@ -1,5 +1,6 @@
 package com.sptech.usuarios.controllers;
 
+import com.sptech.usuarios.hash.HashTable;
 import com.sptech.usuarios.models.Endereco;
 import com.sptech.usuarios.repositorys.EnderecoRepositorio;
 import com.sptech.usuarios.services.EnderecoService;
@@ -13,12 +14,10 @@ import javax.validation.Valid;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/enderecos")
 public class EnderecoController {
-
-    @Autowired
-    private EnderecoRepositorio enderecoRepositorio;
-
     @Autowired
     private EnderecoService enderecoService;
+    HashTable hashTable = new HashTable();
+
 
     @PostMapping("/pacientes/{idUsuario}")
     public ResponseEntity postEnderecoPaciente(@PathVariable Integer idUsuario,
@@ -32,5 +31,10 @@ public class EnderecoController {
                                        @RequestBody @Valid Endereco endereco){
         enderecoService.postNutri(idUsuario, endereco);
         return ResponseEntity.status(201).build();
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity countUserPorRegiao(){
+        return ResponseEntity.status(200).body(enderecoService.countPorRegiao());
     }
 }

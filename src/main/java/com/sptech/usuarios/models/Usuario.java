@@ -47,6 +47,7 @@ public abstract class Usuario{
     private Double experiencia;
     private String categoria;
     private char tipo;
+
     public String getDataNascimento() {
         return dataNascimento;
     }
@@ -195,5 +196,25 @@ public abstract class Usuario{
 
     public void calculaAvaliacao(){
        setAvaliacao((getAvaliacao()/this.nAvaliacoes));
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", nomeUsuario='" + nomeUsuario + '\'' +
+                ", telefoneUsuario='" + telefoneUsuario + '\'' +
+                ", emailUsuario='" + emailUsuario + '\'' +
+                ", senhaUsuario='" + senhaUsuario + '\'' +
+                ", avaliacao=" + avaliacao +
+                ", autenticado=" + autenticado +
+                ", endereco=" + endereco +
+                ", nAvaliacoes=" + nAvaliacoes +
+                ", dataNascimento='" + dataNascimento + '\'' +
+                ", foto='" + foto + '\'' +
+                ", experiencia=" + experiencia +
+                ", categoria='" + categoria + '\'' +
+                ", tipo=" + tipo +
+                '}';
     }
 }
