@@ -1,6 +1,8 @@
 package com.sptech.usuarios.controllers;
 
+import com.sptech.usuarios.dto.UsuarioPaciAtualizaFicha;
 import com.sptech.usuarios.models.UsuarioNutri;
+import com.sptech.usuarios.models.UsuarioPaciente;
 import com.sptech.usuarios.repositorys.UsuarioNutricionistaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -104,6 +106,21 @@ public class UsuarioNutriController implements AcoesUsuarios {
         usuarioNutri.contadorAvalicacoes();
         acoesCrud.save(usuarioNutri);
         return ResponseEntity.status(200).build();
+    }
+
+    @PostMapping("/atualiza-ficha/{idPaciente}")
+    public ResponseEntity patchDados(@PathVariable int idPaciente,
+                                     @RequestBody @Valid UsuarioPaciAtualizaFicha usuarioPaciAtualizaFicha){
+        UsuarioNutri usuarioNutri = acoesCrud.findById(idPaciente);
+        if(Objects.isNull(usuarioNutri)){
+            return ResponseEntity.status(404).build();
+        }
+        usuarioNutri.setEmailUsuario(usuarioPaciAtualizaFicha.getEmailUsuario());
+        usuarioNutri.setTelefoneUsuario(usuarioPaciAtualizaFicha.getTelefoneUsuario());
+        usuarioNutri.setDataNascimento(usuarioPaciAtualizaFicha.getDataNascimento());
+        usuarioNutri.setNomeUsuario(usuarioPaciAtualizaFicha.getNomeUsuario());
+        acoesCrud.save(usuarioNutri);
+        return ResponseEntity.status(200).body(usuarioNutri);
     }
 
 

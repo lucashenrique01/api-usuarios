@@ -26,7 +26,7 @@ public class EnderecoController {
         return ResponseEntity.status(201).build();
     }
 
-    @PostMapping("/nutri/{idUsuario}")
+    @PostMapping("/nutricionistas/{idUsuario}")
     public ResponseEntity postEnderecoNutri(@PathVariable Integer idUsuario,
                                        @RequestBody @Valid Endereco endereco){
         enderecoService.postNutri(idUsuario, endereco);

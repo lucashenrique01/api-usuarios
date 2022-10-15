@@ -9,6 +9,16 @@ public class UsuarioPaciAtualizaFicha {
     private String emailUsuario;
     @NotNull
     private String telefoneUsuario;
+    @NotNull
+    private String nomeUsuario;
+
+    public String getNomeUsuario() {
+        return nomeUsuario;
+    }
+
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
+    }
 
     public String getDataNascimento() {
         return dataNascimento;

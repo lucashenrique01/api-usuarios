@@ -10,7 +10,9 @@ import com.sptech.usuarios.repositorys.UsuarioPacienteRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 @Component
@@ -32,7 +34,6 @@ public class EnderecoService {
             enderecoRepositorio.save(endereco);
             user.get().setEndereco(endereco);
             nutriRep.save(user.get());
-            hashTable.insere(endereco.getEstado(), user.get());
         }
     }
 
@@ -42,10 +43,22 @@ public class EnderecoService {
             enderecoRepositorio.save(endereco);
             user.get().setEndereco(endereco);
             paciRep.save(user.get());
-            hashTable.insere(endereco.getEstado(), user.get());
         }
     }
     public Map<String, Integer> countPorRegiao(){
+        List<UsuarioPaciente> user = paciRep.findAll();
+        for(int i = 0; i < user.size(); i++){
+            if(!Objects.isNull(user.get(i).getEndereco())){
+                this.hashTable.insere(user.get(i).getEndereco().getEstado(), user.get(i).getEndereco().getIdEndereco());
+            }
+
+        }
+        List<UsuarioNutri> userNutri = nutriRep.findAll();
+        for(int i = 0; i < userNutri.size(); i++){
+            if(!Objects.isNull(user.get(i).getEndereco())) {
+                this.hashTable.insere(userNutri.get(i).getEndereco().getEstado(), userNutri.get(i).getEndereco().getIdEndereco());
+            }
+        }
         return hashTable.countPorRegiao();
     }
 }

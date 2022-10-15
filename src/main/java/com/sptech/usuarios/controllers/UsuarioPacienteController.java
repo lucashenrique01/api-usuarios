@@ -117,7 +117,7 @@ public class UsuarioPacienteController {
         return ResponseEntity.status(200).build();
     }
 
-    @PatchMapping("/atualiza-ficha/{idPaciente}/")
+    @PostMapping("/atualiza-ficha/{idPaciente}")
     public ResponseEntity patchDados(@PathVariable int idPaciente,
                                      @RequestBody @Valid UsuarioPaciAtualizaFicha usuarioPaciAtualizaFicha){
         UsuarioPaciente usuarioPaciente = acoesCrud.findById(idPaciente);
@@ -127,6 +127,7 @@ public class UsuarioPacienteController {
         usuarioPaciente.setEmailUsuario(usuarioPaciAtualizaFicha.getEmailUsuario());
         usuarioPaciente.setTelefoneUsuario(usuarioPaciAtualizaFicha.getTelefoneUsuario());
         usuarioPaciente.setDataNascimento(usuarioPaciAtualizaFicha.getDataNascimento());
+        usuarioPaciente.setNomeUsuario(usuarioPaciAtualizaFicha.getNomeUsuario());
         acoesCrud.save(usuarioPaciente);
         return ResponseEntity.status(200).body(usuarioPaciente);
     }

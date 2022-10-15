@@ -6,10 +6,10 @@ public class ListaLigada {
     private Node head;
 
     public ListaLigada() {
-        head = new Node(null);
+        head = new Node(0);
     }
-    public void insereNode(Usuario user) {
-        Node novo = new Node(user);
+    public void insereNode(int id) {
+        Node novo = new Node(id);
         novo.setNext(head.getNext());
         head.setNext(novo);
     }

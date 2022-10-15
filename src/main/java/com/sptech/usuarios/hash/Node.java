@@ -4,22 +4,22 @@ import com.sptech.usuarios.models.Usuario;
 
 public class Node {
     // Atributos
-    private Usuario info;
+    private int info;
     private Node next;
 
     // Construtor
-    public Node (Usuario info) {
+    public Node (int info) {
         this.info = info;
         next = null;
     }
 
     // Métodos
 
-    public Usuario getInfo() {
+    public int getInfo() {
         return info;
     }
 
-    public void setInfo(Usuario info) {
+    public void setInfo(int info) {
         this.info = info;
     }
 

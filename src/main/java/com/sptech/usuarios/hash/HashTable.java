@@ -54,8 +54,8 @@ public class HashTable {
         return null;
     }
 
-    public void insere(String estado, Usuario user) {
-        this.table[funcaoHash(estado)].insereNode(user);
+    public void insere(String estado, int id) {
+        this.table[funcaoHash(estado)].insereNode(id);
     }
 
     public Map<String, Integer> countPorRegiao(){
