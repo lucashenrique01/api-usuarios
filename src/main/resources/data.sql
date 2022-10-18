@@ -20,3 +20,18 @@ VALUES
     ('Renato Cariane', 'rcariane@gmail.com', 'renato123','11-96589-8745',FALSE, 0.0, 'N', 5.0, "UsuarioNutri",
      'Sem Classificação', '30/07/1981', '6598452', 'Competição');
 
+--CREATE TABLE acesso (
+--    id_acesso int primary key auto_increment,
+--    fk_usuario int ,
+--    cadastro date,
+--    ultimo_login date
+--);
+--
+--insert into acesso values (null,2,'2022/10/11','2022/10/12');
+--insert into acesso values (null,3,'2022/10/09','2022/10/12');
+--insert into acesso values (null,4,'2022/10/08','2022/10/12');
+--insert into acesso values (null,5,'2022/09/10','2022/09/12');
+--insert into acesso values (null,6,'2022/09/11','2022/09/12');
+--insert into acesso values (null,7,'2022/09/09','2022/09/12');
+--insert into acesso values (null,8,'2022/09/08','2022/09/12');
+--

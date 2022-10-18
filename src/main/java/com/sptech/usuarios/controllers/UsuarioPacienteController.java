@@ -54,6 +54,15 @@ public class UsuarioPacienteController {
         }
     }
 
+    @GetMapping("/contagem")
+    public ResponseEntity contagemUsuariosPacientes(){
+        if(acoesCrud.findAll().isEmpty()){
+            return ResponseEntity.status(204).build();
+        } else {
+            return ResponseEntity.status(200).body(acoesCrud.findAll().size());
+        }
+    }
+
     @DeleteMapping("/{usuario}")
     public ResponseEntity logoffUsuario(@PathVariable String usuario){
         UsuarioPaciente usuarioAtual = acoesCrud.findByEmailUsuario(usuario);

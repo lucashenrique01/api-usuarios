@@ -16,11 +16,3 @@ public interface ViewUsuarios extends PagingAndSortingRepository<AcessoUsuario,L
 
 }
 
-//@CrossOrigin(origins = "*")
-//@Repository
-//@Transactional
-//public interface RepositorioViewBandaCadastradaShowConfirmado extends PagingAndSortingRepository<ViewBandaCadastradaShowConfirmado, Integer> {
-//
-//    List<ViewBandaCadastradaShowConfirmado> findAll();
-//
-//}

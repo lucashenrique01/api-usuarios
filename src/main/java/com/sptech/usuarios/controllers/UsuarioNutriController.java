@@ -27,6 +27,15 @@ public class UsuarioNutriController implements AcoesUsuarios {
         return ResponseEntity.status(200).body(acoesCrud.findAll());
     }
 
+    @GetMapping("/contagem")
+    public ResponseEntity contagemUsuariosNutri(){
+        if(acoesCrud.findAll().isEmpty()){
+            return ResponseEntity.status(204).build();
+        }
+        return ResponseEntity.status(200).body(acoesCrud.findAll().size());
+    }
+
+
 
     //metodos nutricionista
     @PostMapping

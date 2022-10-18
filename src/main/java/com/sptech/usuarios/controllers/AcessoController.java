@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class AcessoController {
 
     @Autowired
-    private ViewUsuarios AcessoUsuario;
+    private ViewUsuarios a;
 
     @GetMapping
     public ResponseEntity getAcessos(){
-        if(AcessoUsuario.findAll().isEmpty()){
+        if(a.findAll().isEmpty()){
             return ResponseEntity.status(204).build();
         }
-        return ResponseEntity.status(200).body(AcessoUsuario.findAll());
+        return ResponseEntity.status(200).body(a.findAll());
     }
 
 }

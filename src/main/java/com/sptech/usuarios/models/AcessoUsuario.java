@@ -17,11 +17,13 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Immutable
+
 @Subselect("select uuid() as id, hs.* from tempoAcesso hs")
 @Table(name = "tempoAcesso")
 public class AcessoUsuario {
     @Id
     private String id;
+
 
     @Column(name="cadastro")
     private String cadastro;
@@ -34,9 +36,27 @@ public class AcessoUsuario {
 
     @Column(name="l")
     private Integer l;
+
+    public String getId() {
+        return id;
+    }
+
+    public String getCadastro() {
+        return cadastro;
+    }
+
+    public Integer getC() {
+        return c;
+    }
+
+    public String getUltimoLogin() {
+        return ultimoLogin;
+    }
+
+    public Integer getL() {
+        return l;
+    }
 }
-
-
 
 //@Subselect("select uuid() as id, hs.* from view_banda_cadastrada_show_confirmado hs")
 //@Table(name = "view_banda_cadastrada_show_confirmado")
