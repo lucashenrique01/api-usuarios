@@ -25,7 +25,6 @@ public class EnderecoService {
     private UsuarioNutricionistaRepositorio nutriRep;
     @Autowired
     private UsuarioPacienteRepositorio paciRep;
-    HashTable hashTable = new HashTable();
 
 
     public void postNutri(Integer idUsuario, Endereco endereco){
@@ -46,17 +45,18 @@ public class EnderecoService {
         }
     }
     public Map<String, Integer> countPorRegiao(){
+        HashTable hashTable = new HashTable();
         List<UsuarioPaciente> user = paciRep.findAll();
         for(int i = 0; i < user.size(); i++){
             if(!Objects.isNull(user.get(i).getEndereco())){
-                this.hashTable.insere(user.get(i).getEndereco().getEstado(), user.get(i).getEndereco().getIdEndereco());
+                hashTable.insere(user.get(i).getEndereco().getEstado(), user.get(i).getEndereco().getIdEndereco());
             }
 
         }
         List<UsuarioNutri> userNutri = nutriRep.findAll();
         for(int i = 0; i < userNutri.size(); i++){
             if(!Objects.isNull(user.get(i).getEndereco())) {
-                this.hashTable.insere(userNutri.get(i).getEndereco().getEstado(), userNutri.get(i).getEndereco().getIdEndereco());
+                hashTable.insere(userNutri.get(i).getEndereco().getEstado(), userNutri.get(i).getEndereco().getIdEndereco());
             }
         }
         return hashTable.countPorRegiao();
