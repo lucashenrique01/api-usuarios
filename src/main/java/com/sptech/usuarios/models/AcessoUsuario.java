@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Data
@@ -26,22 +27,22 @@ public class AcessoUsuario {
 
 
     @Column(name="cadastro")
-    private String cadastro;
+    private Date cadastro;
 
-    @Column(name="c")
+    @Column(name="dias_cadastrado")
     private Integer c;
 
     @Column(name="ultimo_login")
-    private String ultimoLogin;
+    private Date ultimoLogin;
 
-    @Column(name="l")
+    @Column(name="dias_sem_login")
     private Integer l;
 
     public String getId() {
         return id;
     }
 
-    public String getCadastro() {
+    public Date getCadastro() {
         return cadastro;
     }
 
@@ -49,7 +50,7 @@ public class AcessoUsuario {
         return c;
     }
 
-    public String getUltimoLogin() {
+    public Date getUltimoLogin() {
         return ultimoLogin;
     }
 

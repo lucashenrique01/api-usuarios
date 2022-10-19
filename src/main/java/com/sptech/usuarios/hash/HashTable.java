@@ -62,7 +62,7 @@ public class HashTable {
         Map<String, Integer> regigoes = new HashMap<String, Integer>();
         regigoes.put("Norte", this.table[0].getTamanho());
         regigoes.put("Nordeste", this.table[1].getTamanho());
-        regigoes.put("Centro-oeste", this.table[2].getTamanho());
+        regigoes.put("Centro_oeste", this.table[2].getTamanho());
         regigoes.put("Sudeste", this.table[3].getTamanho());
         regigoes.put("Sul", this.table[4].getTamanho());
         return regigoes;

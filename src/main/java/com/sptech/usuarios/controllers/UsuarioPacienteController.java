@@ -141,6 +141,19 @@ public class UsuarioPacienteController {
         return ResponseEntity.status(200).body(usuarioPaciente);
     }
 
+    @PatchMapping(value = "/foto/{codigo}", consumes = "image/jpeg")
+    public ResponseEntity patchFoto(@PathVariable int codigo,
+                                    @RequestBody byte[] novaFoto) {
+        if (!acoesCrud.existsById(codigo)) {
+            return ResponseEntity.status(404).build();
+        }
+        UsuarioPaciente user = acoesCrud.findById(codigo);
+        user.setFoto(novaFoto);
+        acoesCrud.save(user);
+//        acoesCrud.atualizarFoto(codigo, novaFoto);
+
+        return ResponseEntity.status(200).build();
+    }
 
 
 }
