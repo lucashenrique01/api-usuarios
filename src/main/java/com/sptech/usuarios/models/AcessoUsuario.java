@@ -38,6 +38,9 @@ public class AcessoUsuario {
     @Column(name="dias_sem_login")
     private Integer l;
 
+    @Column(name="mes")
+    private Integer mes;
+
     public String getId() {
         return id;
     }
@@ -56,6 +59,10 @@ public class AcessoUsuario {
 
     public Integer getL() {
         return l;
+    }
+
+    public Integer getMes() {
+        return mes;
     }
 }
 
