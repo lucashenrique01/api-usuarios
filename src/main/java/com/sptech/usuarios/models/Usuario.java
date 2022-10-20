@@ -48,10 +48,10 @@ public abstract class Usuario{
     private Double experiencia;
     private String categoria;
     private char tipo;
-    private Boolean hasEndereco;
+    private Boolean hasEndereco = false;
 
     public Boolean getHasEndereco() {
-        return hasEndereco;
+        return !Objects.isNull(this.endereco);
     }
 
     public void setHasEndereco(Boolean hasEndereco) {
