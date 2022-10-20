@@ -27,7 +27,7 @@ public abstract class Usuario{
     private String emailUsuario;
     @NotBlank
     @Size(min = 4, max = 15)
-
+    @JsonIgnore
     //@JsonProperty("senhaUsuario")
     private String senhaUsuario;
     @NotNull
@@ -48,6 +48,15 @@ public abstract class Usuario{
     private Double experiencia;
     private String categoria;
     private char tipo;
+    private Boolean hasEndereco = false;
+
+    public Boolean getHasEndereco() {
+        return !Objects.isNull(this.endereco);
+    }
+
+    public void setHasEndereco(Boolean hasEndereco) {
+        this.hasEndereco = hasEndereco;
+    }
 
     public String getDataNascimento() {
         return dataNascimento;

@@ -150,8 +150,6 @@ public class UsuarioPacienteController {
         UsuarioPaciente user = acoesCrud.findById(codigo);
         user.setFoto(novaFoto);
         acoesCrud.save(user);
-//        acoesCrud.atualizarFoto(codigo, novaFoto);
-
         return ResponseEntity.status(200).build();
     }
 
