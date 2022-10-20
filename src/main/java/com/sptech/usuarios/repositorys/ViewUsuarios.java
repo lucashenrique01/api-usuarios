@@ -1,6 +1,7 @@
 package com.sptech.usuarios.repositorys;
 
 import com.sptech.usuarios.models.AcessoUsuario;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,6 +14,5 @@ import java.util.List;
 @Transactional
 public interface ViewUsuarios extends PagingAndSortingRepository<AcessoUsuario,Long> {
     List<AcessoUsuario> findAll();
-
 }
 
