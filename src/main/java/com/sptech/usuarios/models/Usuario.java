@@ -27,7 +27,7 @@ public abstract class Usuario{
     private String emailUsuario;
     @NotBlank
     @Size(min = 4, max = 15)
-
+    @JsonIgnore
     //@JsonProperty("senhaUsuario")
     private String senhaUsuario;
     @NotNull
