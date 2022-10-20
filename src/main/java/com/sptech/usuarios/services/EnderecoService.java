@@ -49,7 +49,7 @@ public class EnderecoService {
     public Map<String, Integer> countPorRegiao(){
         HashTable hashTable = new HashTable();
         List<UsuarioPaciente> user = paciRep.findAll();
-        for(int i = 0; i < user.size(); i++){
+         for(int i = 0; i < user.size(); i++){
             if(!(Objects.isNull(user.get(i).getEndereco()))){
                 hashTable.insere(user.get(i).getEndereco().getEstado(), user.get(i).getEndereco().getIdEndereco());
             }
