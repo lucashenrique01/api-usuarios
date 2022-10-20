@@ -32,6 +32,7 @@ public class EnderecoService {
         if(user.isPresent()){
             enderecoRepositorio.save(endereco);
             user.get().setEndereco(endereco);
+            user.get().setHasEndereco(true);
             nutriRep.save(user.get());
         }
     }
@@ -41,6 +42,7 @@ public class EnderecoService {
         if(user.isPresent()){
             enderecoRepositorio.save(endereco);
             user.get().setEndereco(endereco);
+            user.get().setHasEndereco(true);
             paciRep.save(user.get());
         }
     }

@@ -48,6 +48,15 @@ public abstract class Usuario{
     private Double experiencia;
     private String categoria;
     private char tipo;
+    private Boolean hasEndereco;
+
+    public Boolean getHasEndereco() {
+        return hasEndereco;
+    }
+
+    public void setHasEndereco(Boolean hasEndereco) {
+        this.hasEndereco = hasEndereco;
+    }
 
     public String getDataNascimento() {
         return dataNascimento;
