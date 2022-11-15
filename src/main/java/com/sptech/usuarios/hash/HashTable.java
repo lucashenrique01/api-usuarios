@@ -1,10 +1,11 @@
 package com.sptech.usuarios.hash;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.sptech.usuarios.models.Usuario;
 
 import java.util.HashMap;
 import java.util.Map;
-
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class HashTable {
 
     // Atributo
