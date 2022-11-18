@@ -43,8 +43,8 @@ public abstract class Usuario{
     @Transient
     private int nAvaliacoes;
     private String dataNascimento;
-    @Column(length = 50_000_000)
-    private byte[]  foto;
+
+    private String foto;
     private Double experiencia;
     private String categoria;
     private char tipo;
@@ -86,11 +86,11 @@ public abstract class Usuario{
         return senhaUsuario;
     }
 
-    public byte[] getFoto() {
+    public String getFoto() {
         return foto;
     }
 
-    public void setFoto(byte[] foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 

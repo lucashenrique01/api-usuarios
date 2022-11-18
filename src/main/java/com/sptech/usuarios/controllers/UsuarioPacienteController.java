@@ -141,14 +141,14 @@ public class UsuarioPacienteController {
         return ResponseEntity.status(200).body(usuarioPaciente);
     }
 
-    @PatchMapping(value = "/foto/{codigo}", consumes = "image/jpeg")
+    @PatchMapping("/foto/{codigo}/{novaFoto}")
     public ResponseEntity patchFoto(@PathVariable int codigo,
-                                    @RequestBody byte[] novaFoto) {
+                                    @PathVariable String novaFoto) {
         if (!acoesCrud.existsById(codigo)) {
             return ResponseEntity.status(404).build();
         }
         UsuarioPaciente user = acoesCrud.findById(codigo);
-        user.setFoto(novaFoto);
+        user.setFoto(codigo+novaFoto);
         acoesCrud.save(user);
         return ResponseEntity.status(200).build();
     }

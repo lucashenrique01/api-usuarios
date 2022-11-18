@@ -138,14 +138,17 @@ public class UsuarioNutriController implements AcoesUsuarios {
         return ResponseEntity.status(200).body(usuarioNutri);
     }
 
-    @PatchMapping(value = "/foto/{codigo}", consumes = "image/jpeg")
+    @PatchMapping( "/foto/{codigo}")
     public ResponseEntity patchFoto(@PathVariable int codigo,
-                                    @RequestBody byte[] novaFoto) {
+                                    @RequestBody String novaFoto) {
         if (!acoesCrud.existsById(codigo)) {
             return ResponseEntity.status(404).build();
         }
+        StringBuilder foto = new StringBuilder();
+        foto.append(codigo);
+        foto.append(novaFoto);
         UsuarioNutri user = acoesCrud.findById(codigo);
-        user.setFoto(novaFoto);
+        user.setFoto(foto.toString());
         acoesCrud.save(user);
         return ResponseEntity.status(200).build();
     }
