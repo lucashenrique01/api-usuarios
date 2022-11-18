@@ -37,4 +37,9 @@ public class EnderecoController {
     public ResponseEntity countUserPorRegiao(){
         return ResponseEntity.status(200).body(enderecoService.countPorRegiao());
     }
+
+    @GetMapping("/count-juntos")
+    public ResponseEntity countUserPorRegiaoJuntos(){
+        return ResponseEntity.status(200).body(enderecoService.countPorRegiaoJuntos());
+    }
 }

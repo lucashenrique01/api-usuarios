@@ -10,10 +10,7 @@ import com.sptech.usuarios.repositorys.UsuarioPacienteRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 public class EnderecoService {
@@ -46,7 +43,29 @@ public class EnderecoService {
             paciRep.save(user.get());
         }
     }
-    public Map<String, Integer> countPorRegiao(){
+    public Map<String, Map<String, Integer>> countPorRegiao(){
+        HashTable hashPaci = new HashTable();
+        HashTable hashNutri = new HashTable();
+        List<UsuarioPaciente> user = paciRep.findAll();
+         for(int i = 0; i < user.size(); i++){
+            if(!(Objects.isNull(user.get(i).getEndereco()))){
+                hashPaci.insere(user.get(i).getEndereco().getEstado(), user.get(i).getEndereco().getIdEndereco());
+            }
+
+        }
+        List<UsuarioNutri> userNutri = nutriRep.findAll();
+        for(int i = 0; i < userNutri.size(); i++){
+            if(!(Objects.isNull(userNutri.get(i).getEndereco()))) {
+                hashNutri.insere(userNutri.get(i).getEndereco().getEstado(), userNutri.get(i).getEndereco().getIdEndereco());
+            }
+        }
+        Map<String, Map<String, Integer>> result = new HashMap<>();
+        result.put("Pacientes", hashPaci.countPorRegiao());
+        result.put("Nutricionistas", hashNutri.countPorRegiao());
+        return result;
+    }
+
+    public Map<String, Integer> countPorRegiaoJuntos(){
         HashTable hashTable = new HashTable();
         List<UsuarioPaciente> user = paciRep.findAll();
         for(int i = 0; i < user.size(); i++){

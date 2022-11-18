@@ -19,51 +19,75 @@ import java.util.Date;
 @AllArgsConstructor
 @Immutable
 
-@Subselect("select uuid() as id, hs.* from tempoAcesso hs")
-@Table(name = "tempoAcesso")
+@Subselect("select uuid() as id, hs.* from agosto hs")
+@Table(name = "agosto")
 public class AcessoUsuario {
     @Id
     private String id;
 
+    @Column(name="inativos")
+    private Integer inativo;
 
-    @Column(name="cadastro")
-    private Date cadastro;
+    @Column(name="novos")
+    private Integer novos;
 
-    @Column(name="dias_cadastrado")
-    private Integer c;
-
-    @Column(name="ultimo_login")
-    private Date ultimoLogin;
-
-    @Column(name="dias_sem_login")
-    private Integer l;
-
-    @Column(name="mes")
-    private Integer mes;
+    @Column(name="total")
+    private Integer total;
 
     public String getId() {
         return id;
     }
 
-    public Date getCadastro() {
-        return cadastro;
+    public Integer getInativo() {
+        return inativo;
     }
 
-    public Integer getC() {
-        return c;
+    public Integer getNovos() {
+        return novos;
     }
 
-    public Date getUltimoLogin() {
-        return ultimoLogin;
+    public Integer getTotal() {
+        return total;
     }
 
-    public Integer getL() {
-        return l;
-    }
-
-    public Integer getMes() {
-        return mes;
-    }
+    //    @Column(name="cadastro")
+//    private Date cadastro;
+//
+//    @Column(name="dias_cadastrado")
+//    private Integer c;
+//
+//    @Column(name="ultimo_login")
+//    private Date ultimoLogin;
+//
+//    @Column(name="dias_sem_login")
+//    private Integer l;
+//
+//    @Column(name="mes")
+//    private Integer mes;
+//
+//    public String getId() {
+//        return id;
+//    }
+//
+//    public Date getCadastro() {
+//        return cadastro;
+//    }
+//
+//    public Integer getC() {
+//        return c;
+//    }
+//
+//    public Date getUltimoLogin() {
+//        return ultimoLogin;
+//    }
+//
+//    public Integer getL() {
+//        return l;
+//    }
+//
+//    public Integer getMes() {
+//        return mes;
+//    }
 }
 
 //@Subselect("select uuid() as id, hs.* from view_banda_cadastrada_show_confirmado hs")
