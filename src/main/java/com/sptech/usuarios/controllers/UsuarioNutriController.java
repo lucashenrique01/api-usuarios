@@ -41,14 +41,14 @@ public class UsuarioNutriController implements AcoesUsuarios {
     public ResponseEntity autenticarUsuario(@PathVariable String usuario, @PathVariable String senha){
         UsuarioNutri usuarioAtual = acoesCrud.findByEmailUsuario(usuario);
         if(Objects.isNull(usuarioAtual)){
-            return ResponseEntity.status(403).build(); //Usuario nao encontrado
+            return ResponseEntity.status(403).build();
         }else {
             if(usuarioAtual.autenticar(usuario, senha)){
                 usuarioAtual.setAutenticado(true);
                 acoesCrud.save(usuarioAtual);
                 return ResponseEntity.status(200).body(usuarioAtual);
             }
-            return ResponseEntity.status(403).build(); //Senha incorreta
+            return ResponseEntity.status(403).build();
         }
 
     }
