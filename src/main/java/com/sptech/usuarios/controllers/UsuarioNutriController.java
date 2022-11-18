@@ -1,5 +1,6 @@
 package com.sptech.usuarios.controllers;
 
+import com.sptech.usuarios.dto.HorariosDto;
 import com.sptech.usuarios.dto.UsuarioPaciAtualizaFicha;
 import com.sptech.usuarios.models.UsuarioNutri;
 import com.sptech.usuarios.models.UsuarioPaciente;
@@ -9,6 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 @RestController
@@ -141,6 +147,35 @@ public class UsuarioNutriController implements AcoesUsuarios {
         UsuarioNutri user = acoesCrud.findById(codigo);
         user.setFoto(novaFoto);
         acoesCrud.save(user);
+        return ResponseEntity.status(200).build();
+    }
+    @GetMapping("/horas/{idNutri}")
+    public ResponseEntity getHorasConsulta(@PathVariable int idNutri){
+        UsuarioNutri usuarioNutri = acoesCrud.findById(idNutri);
+        if(Objects.isNull(usuarioNutri)){
+            return ResponseEntity.status(404).build();
+        }
+
+        Map<String, LocalTime> horarios = new HashMap<>();
+        horarios.put("inicio", usuarioNutri.getHoraInicio());
+        horarios.put("fim", usuarioNutri.getHoraFim());
+        horarios.put("duracao", usuarioNutri.getDuracaoConsulta());
+        return ResponseEntity.status(200).body(horarios);
+    }
+    @PatchMapping("/horas/{idNutri}")
+    public ResponseEntity patchHorarios(@PathVariable int idNutri,
+                                        @RequestBody HorariosDto horarios){
+        UsuarioNutri usuarioNutri = acoesCrud.findById(idNutri);
+        if(Objects.isNull(usuarioNutri)){
+            return ResponseEntity.status(404).build();
+        }
+        LocalTime horaInicio = LocalTime.of(horarios.getHoraInicio(), horarios.getMinInicio());
+        LocalTime horaFim = LocalTime.of(horarios.getHoraFim(), horarios.getMinFim());
+        LocalTime duracao = LocalTime.of(horarios.getHoraDuracaoConsulta(), horarios.getMinDuracaoConsulta());
+        usuarioNutri.setHoraInicio(horaInicio);
+        usuarioNutri.setHoraFim(horaFim);
+        usuarioNutri.setDuracaoConsulta(duracao);
+        acoesCrud.save(usuarioNutri);
         return ResponseEntity.status(200).build();
     }
 
