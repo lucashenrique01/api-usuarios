@@ -1,6 +1,8 @@
 package com.sptech.usuarios.controllers;
 
+import com.sptech.usuarios.dto.UsuarioPaciAtualizaFicha;
 import com.sptech.usuarios.models.UsuarioNutri;
+import com.sptech.usuarios.models.UsuarioPaciente;
 import com.sptech.usuarios.repositorys.UsuarioNutricionistaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +12,7 @@ import javax.validation.Valid;
 import java.util.Objects;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/nutricionistas")
 public class UsuarioNutriController implements AcoesUsuarios {
 
@@ -24,6 +26,15 @@ public class UsuarioNutriController implements AcoesUsuarios {
         }
         return ResponseEntity.status(200).body(acoesCrud.findAll());
     }
+
+    @GetMapping("/contagem")
+    public ResponseEntity contagemUsuariosNutri(){
+        if(acoesCrud.findAll().isEmpty()){
+            return ResponseEntity.status(204).build();
+        }
+        return ResponseEntity.status(200).body(acoesCrud.findAll().size());
+    }
+
 
 
     //metodos nutricionista
@@ -50,7 +61,6 @@ public class UsuarioNutriController implements AcoesUsuarios {
             }
             return ResponseEntity.status(403).build();
         }
-
     }
 
 
@@ -104,6 +114,36 @@ public class UsuarioNutriController implements AcoesUsuarios {
         usuarioNutri.setAvaliacao(nota);
         usuarioNutri.contadorAvalicacoes();
         acoesCrud.save(usuarioNutri);
+        return ResponseEntity.status(200).build();
+    }
+
+    @PostMapping("/atualiza-ficha/{idPaciente}")
+    public ResponseEntity patchDados(@PathVariable int idPaciente,
+                                     @RequestBody @Valid UsuarioPaciAtualizaFicha usuarioPaciAtualizaFicha){
+        UsuarioNutri usuarioNutri = acoesCrud.findById(idPaciente);
+        if(Objects.isNull(usuarioNutri)){
+            return ResponseEntity.status(404).build();
+        }
+        usuarioNutri.setEmailUsuario(usuarioPaciAtualizaFicha.getEmailUsuario());
+        usuarioNutri.setTelefoneUsuario(usuarioPaciAtualizaFicha.getTelefoneUsuario());
+        usuarioNutri.setDataNascimento(usuarioPaciAtualizaFicha.getDataNascimento());
+        usuarioNutri.setNomeUsuario(usuarioPaciAtualizaFicha.getNomeUsuario());
+        acoesCrud.save(usuarioNutri);
+        return ResponseEntity.status(200).body(usuarioNutri);
+    }
+
+    @PatchMapping( "/foto/{codigo}")
+    public ResponseEntity patchFoto(@PathVariable int codigo,
+                                    @RequestBody String novaFoto) {
+        if (!acoesCrud.existsById(codigo)) {
+            return ResponseEntity.status(404).build();
+        }
+        StringBuilder foto = new StringBuilder();
+        foto.append(codigo);
+        foto.append(novaFoto);
+        UsuarioNutri user = acoesCrud.findById(codigo);
+        user.setFoto(foto.toString());
+        acoesCrud.save(user);
         return ResponseEntity.status(200).build();
     }
 

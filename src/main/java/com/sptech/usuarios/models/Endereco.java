@@ -1,19 +1,27 @@
 package com.sptech.usuarios.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Endereco {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idEndereco;
+
     private String logradouro;
+
     private String bairro;
+
     private int numero;
+
     private String complemento;
+
     private String cidade;
+
     private String estado;
+
+    private String cep;
 
     public Integer getIdEndereco() {
         return idEndereco;
@@ -69,5 +77,11 @@ public class Endereco {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+    public String getCep() {
+        return cep;
+    }
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 }

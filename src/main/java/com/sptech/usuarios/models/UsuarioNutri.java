@@ -14,20 +14,15 @@ public class UsuarioNutri extends Usuario{
     @NotBlank
     @Size(min = 7, max =7, message = "inseira um crn válido")
     private String crn;
-
-
     public void setEspecialidade(String especialidade) {
         this.especialidade = especialidade;
     }
-
     public void setCrn(String crn) {
         this.crn = crn;
     }
-
     public String getEspecialidade() {
         return especialidade;
     }
-
     public String getCrn() {
         return crn;
     }

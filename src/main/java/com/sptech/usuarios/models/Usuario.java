@@ -9,7 +9,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "tb_usuarios")
-@DiscriminatorColumn(name="tipoConta")
 public abstract class Usuario{
 
     @Id
@@ -19,8 +18,8 @@ public abstract class Usuario{
    @Size(min = 4, max = 30)
     //@JsonProperty("nomeUsuario")
     private String nomeUsuario;
-       @Pattern(regexp = "(\\(?\\d{2}\\)?\\s)?(\\d{4,5}\\-\\d{4})"
-           , message = "Informe um telefone válido com ou sem DDD")
+//       @Pattern(regexp = "([0-9]{2,3})?(\\([0-9]{2}\\))([0-9]{4,5})([0-9]{4})"
+//           , message = "Informe um telefone válido com ou sem DDD")
     //@JsonProperty("telefoneUsuario")
     private String telefoneUsuario;
     @Email
@@ -28,7 +27,7 @@ public abstract class Usuario{
     private String emailUsuario;
     @NotBlank
     @Size(min = 4, max = 15)
-
+    @JsonIgnore
     //@JsonProperty("senhaUsuario")
     private String senhaUsuario;
     @NotNull
@@ -43,9 +42,29 @@ public abstract class Usuario{
     private Endereco endereco;
     @Transient
     private int nAvaliacoes;
+    private String dataNascimento;
+
     private String foto;
     private Double experiencia;
     private String categoria;
+    private char tipo;
+    private Boolean hasEndereco = false;
+
+    public Boolean getHasEndereco() {
+        return !Objects.isNull(this.endereco);
+    }
+
+    public void setHasEndereco(Boolean hasEndereco) {
+        this.hasEndereco = hasEndereco;
+    }
+
+    public String getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
 
     public String getCategoria() {
         return categoria;
@@ -153,6 +172,14 @@ public abstract class Usuario{
         return this.avaliacao;
     }
 
+    public char getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(char tipoConta) {
+        this.tipo = tipoConta;
+    }
+
     public void setAvaliacao(Double avaliacao) {
         if(Objects.isNull(this.avaliacao)){
             this.avaliacao = avaliacao;
@@ -179,5 +206,25 @@ public abstract class Usuario{
 
     public void calculaAvaliacao(){
        setAvaliacao((getAvaliacao()/this.nAvaliacoes));
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", nomeUsuario='" + nomeUsuario + '\'' +
+                ", telefoneUsuario='" + telefoneUsuario + '\'' +
+                ", emailUsuario='" + emailUsuario + '\'' +
+                ", senhaUsuario='" + senhaUsuario + '\'' +
+                ", avaliacao=" + avaliacao +
+                ", autenticado=" + autenticado +
+                ", endereco=" + endereco +
+                ", nAvaliacoes=" + nAvaliacoes +
+                ", dataNascimento='" + dataNascimento + '\'' +
+                ", foto='" + foto + '\'' +
+                ", experiencia=" + experiencia +
+                ", categoria='" + categoria + '\'' +
+                ", tipo=" + tipo +
+                '}';
     }
 }

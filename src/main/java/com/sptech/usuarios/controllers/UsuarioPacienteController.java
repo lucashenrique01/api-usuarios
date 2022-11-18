@@ -1,8 +1,7 @@
 package com.sptech.usuarios.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sptech.usuarios.models.Usuario;
+
+import com.sptech.usuarios.dto.UsuarioPaciAtualizaFicha;
 import com.sptech.usuarios.repositorys.UsuarioPacienteRepositorio;
 import com.sptech.usuarios.models.UsuarioPaciente;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.lang.annotation.Repeatable;
 import java.util.Objects;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/pacientes")
 public class UsuarioPacienteController {
 
@@ -53,6 +51,15 @@ public class UsuarioPacienteController {
             return ResponseEntity.status(204).build();
         } else {
             return ResponseEntity.status(200).body(acoesCrud.findAll());
+        }
+    }
+
+    @GetMapping("/contagem")
+    public ResponseEntity contagemUsuariosPacientes(){
+        if(acoesCrud.findAll().isEmpty()){
+            return ResponseEntity.status(204).build();
+        } else {
+            return ResponseEntity.status(200).body(acoesCrud.findAll().size());
         }
     }
 
@@ -119,6 +126,32 @@ public class UsuarioPacienteController {
         return ResponseEntity.status(200).build();
     }
 
+    @PostMapping("/atualiza-ficha/{idPaciente}")
+    public ResponseEntity patchDados(@PathVariable int idPaciente,
+                                     @RequestBody @Valid UsuarioPaciAtualizaFicha usuarioPaciAtualizaFicha){
+        UsuarioPaciente usuarioPaciente = acoesCrud.findById(idPaciente);
+        if(Objects.isNull(usuarioPaciente)){
+            return ResponseEntity.status(404).build();
+        }
+        usuarioPaciente.setEmailUsuario(usuarioPaciAtualizaFicha.getEmailUsuario());
+        usuarioPaciente.setTelefoneUsuario(usuarioPaciAtualizaFicha.getTelefoneUsuario());
+        usuarioPaciente.setDataNascimento(usuarioPaciAtualizaFicha.getDataNascimento());
+        usuarioPaciente.setNomeUsuario(usuarioPaciAtualizaFicha.getNomeUsuario());
+        acoesCrud.save(usuarioPaciente);
+        return ResponseEntity.status(200).body(usuarioPaciente);
+    }
+
+    @PatchMapping("/foto/{codigo}/{novaFoto}")
+    public ResponseEntity patchFoto(@PathVariable int codigo,
+                                    @PathVariable String novaFoto) {
+        if (!acoesCrud.existsById(codigo)) {
+            return ResponseEntity.status(404).build();
+        }
+        UsuarioPaciente user = acoesCrud.findById(codigo);
+        user.setFoto(codigo+novaFoto);
+        acoesCrud.save(user);
+        return ResponseEntity.status(200).build();
+    }
 
 
 }
