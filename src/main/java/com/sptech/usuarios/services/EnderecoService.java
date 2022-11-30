@@ -43,26 +43,29 @@ public class EnderecoService {
             paciRep.save(user.get());
         }
     }
-    public Map<String, Map<String, Integer>> countPorRegiao(){
+
+
+    public Map<String, Integer> countPaciente(){
         HashTable hashPaci = new HashTable();
-        HashTable hashNutri = new HashTable();
         List<UsuarioPaciente> user = paciRep.findAll();
-         for(int i = 0; i < user.size(); i++){
+        for(int i = 0; i < user.size(); i++){
             if(!(Objects.isNull(user.get(i).getEndereco()))){
                 hashPaci.insere(user.get(i).getEndereco().getEstado(), user.get(i).getEndereco().getIdEndereco());
             }
 
         }
+        return hashPaci.countPorRegiao();
+    }
+    public Map<String, Integer> countNutri(){
+        HashTable hashNutri = new HashTable();
+        List<UsuarioPaciente> user = paciRep.findAll();
         List<UsuarioNutri> userNutri = nutriRep.findAll();
         for(int i = 0; i < userNutri.size(); i++){
             if(!(Objects.isNull(userNutri.get(i).getEndereco()))) {
                 hashNutri.insere(userNutri.get(i).getEndereco().getEstado(), userNutri.get(i).getEndereco().getIdEndereco());
             }
         }
-        Map<String, Map<String, Integer>> result = new HashMap<>();
-        result.put("Pacientes", hashPaci.countPorRegiao());
-        result.put("Nutricionistas", hashNutri.countPorRegiao());
-        return result;
+        return hashNutri.countPorRegiao();
     }
 
     public Map<String, Integer> countPorRegiaoJuntos(){
