@@ -3,16 +3,13 @@ package com.sptech.usuarios.controllers;
 import com.sptech.usuarios.dto.HorariosDto;
 import com.sptech.usuarios.dto.UsuarioPaciAtualizaFicha;
 import com.sptech.usuarios.models.UsuarioNutri;
-import com.sptech.usuarios.models.UsuarioPaciente;
 import com.sptech.usuarios.repositorys.UsuarioNutricionistaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.text.SimpleDateFormat;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
