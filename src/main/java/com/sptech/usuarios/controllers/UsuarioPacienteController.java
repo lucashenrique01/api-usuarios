@@ -153,5 +153,16 @@ public class UsuarioPacienteController {
         return ResponseEntity.status(200).build();
     }
 
+    @GetMapping("/foto/{idPaci}")
+    public ResponseEntity getFotoUser(@PathVariable int idPaci){
+        if (!acoesCrud.existsById(idPaci)) {
+            return ResponseEntity.status(404).build();
+        }
+        UsuarioPaciente user = acoesCrud.findById(idPaci);
+        if(user.getFoto() != null){
+            return ResponseEntity.status(200).body(user.getFoto());
+        } else return ResponseEntity.status(204).build();
+    }
+
 
 }
