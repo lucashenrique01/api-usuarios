@@ -33,9 +33,13 @@ public class EnderecoController {
         return ResponseEntity.status(201).build();
     }
 
-    @GetMapping("/count")
-    public ResponseEntity countUserPorRegiao(){
-        return ResponseEntity.status(200).body(enderecoService.countPorRegiao());
+    @GetMapping("/count-pacientes")
+    public ResponseEntity countPacientes(){
+        return ResponseEntity.status(200).body(enderecoService.countPaciente());
+    }
+    @GetMapping("/count-nutricionistas")
+    public ResponseEntity countNutricionistas(){
+        return ResponseEntity.status(200).body(enderecoService.countNutri());
     }
 
     @GetMapping("/count-juntos")

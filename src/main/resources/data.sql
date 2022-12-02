@@ -5,7 +5,7 @@ use nutrion;
 INSERT INTO tb_usuarios
 (nome_usuario, email_usuario, senha_usuario, telefone_usuario, autenticado, experiencia, tipo, avaliacao, dtype, has_endereco)
 VALUES
-    ('Lucas Henrique', 'henrique.adelino@gmail.com', 'lucas123', '11-95219-3268', FALSE, 0.0, 'P', 0.0, "UsuarioPaciente", FALSE),
+    ('Lucas Henrique', 'henrique.adelino@gmail.com', 'lucas123', '11-95219-3268', FALSE, 0.0, , 0.0, "UsuarioPaciente", FALSE),
     ('Victor Aquino', 'victor.aquino@gmail.com', 'victor1020', '11-95214-3256',FALSE, 0.0, 'P', 0.0, "UsuarioPaciente", FALSE),
     ('Victor Ferreira', 'victor.ferreira@gmail.com', 'ferreiraV10','11-96874-2541',FALSE, 0.0, 'P', 0.0, "UsuarioPaciente", FALSE),
     ('Pedro Altoe', 'pedro.atoe@gmail.com', 'pedrao2030', '11-5458-5478',FALSE, 0.0, 'P', 0.0, "UsuarioPaciente", FALSE),
