@@ -138,17 +138,14 @@ public class UsuarioNutriController implements AcoesUsuarios {
         return ResponseEntity.status(200).body(usuarioNutri);
     }
 
-    @PatchMapping( "/foto/{codigo}")
+    @PatchMapping("/foto/{codigo}/{novaFoto}")
     public ResponseEntity patchFoto(@PathVariable int codigo,
-                                    @RequestBody String novaFoto) {
+                                    @PathVariable String novaFoto) {
         if (!acoesCrud.existsById(codigo)) {
             return ResponseEntity.status(404).build();
         }
-        StringBuilder foto = new StringBuilder();
-        foto.append(codigo);
-        foto.append(novaFoto);
         UsuarioNutri user = acoesCrud.findById(codigo);
-        user.setFoto(foto.toString());
+        user.setFoto(codigo+novaFoto);
         acoesCrud.save(user);
         return ResponseEntity.status(200).build();
     }
@@ -181,6 +178,8 @@ public class UsuarioNutriController implements AcoesUsuarios {
         acoesCrud.save(usuarioNutri);
         return ResponseEntity.status(200).build();
     }
+
+
 
 
 }

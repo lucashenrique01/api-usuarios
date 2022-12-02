@@ -17,4 +17,6 @@ public interface UsuarioPacienteRepositorio extends CrudRepository<UsuarioPacien
 
     <UserMod extends UsuarioPaciente>UserMod save(UserMod usuarioPaciente);
 
+
+
 }

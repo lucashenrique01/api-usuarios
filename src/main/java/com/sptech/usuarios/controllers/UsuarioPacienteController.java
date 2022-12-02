@@ -88,6 +88,7 @@ public class UsuarioPacienteController {
         return ResponseEntity.status(200).body(usuarioEncontrado);
     }
 
+
     @PatchMapping
     public ResponseEntity alterarSenha(@PathVariable int id,
                                        @RequestBody UsuarioPaciente usuarioNutri){

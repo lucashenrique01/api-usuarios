@@ -16,7 +16,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(classes = {UsuarioNutriController.class})
-class UsuarioNutriControllerTest {
+class UsuarioRepositorioNutriControllerTest {
 
     @Autowired
     UsuarioNutriController controller;
