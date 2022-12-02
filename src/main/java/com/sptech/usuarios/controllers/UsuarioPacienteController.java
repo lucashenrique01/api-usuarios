@@ -2,6 +2,7 @@ package com.sptech.usuarios.controllers;
 
 
 import com.sptech.usuarios.dto.UsuarioPaciAtualizaFicha;
+import com.sptech.usuarios.repositorys.DietaRepositorio;
 import com.sptech.usuarios.repositorys.UsuarioPacienteRepositorio;
 import com.sptech.usuarios.models.UsuarioPaciente;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class UsuarioPacienteController {
 
     @Autowired
     private UsuarioPacienteRepositorio acoesCrud;
+
+
 
     @PostMapping
     public ResponseEntity cadastrarUsuario(@RequestBody @Valid UsuarioPaciente novoUsuario) {
@@ -164,6 +167,8 @@ public class UsuarioPacienteController {
             return ResponseEntity.status(200).body(user.getFoto());
         } else return ResponseEntity.status(204).build();
     }
+
+
 
 
 }
