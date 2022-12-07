@@ -12,19 +12,29 @@ public class Dieta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idDieta;
-
     private String categoria;
-    private String periodo;
     private String autor;
-    private String dieta;
+    private String manha;
+    private String tarde;
+    private String noite;
+    private Integer fkAutor;
 
-    public Integer getId() {
+    public Integer getIdDieta() {
         return idDieta;
     }
 
-    public void setId(Integer id) {
-        this.idDieta = id;
+    public void setIdDieta(Integer idDieta) {
+        this.idDieta = idDieta;
     }
+
+    public Integer getFkAutor() {
+        return fkAutor;
+    }
+
+    public void setFkAutor(Integer fkAutor) {
+        this.fkAutor = fkAutor;
+    }
+
 
     public String getCategoria() {
         return categoria;
@@ -32,14 +42,6 @@ public class Dieta {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
-    }
-
-    public String getPeriodo() {
-        return periodo;
-    }
-
-    public void setPeriodo(String periodo) {
-        this.periodo = periodo;
     }
 
     public String getAutor() {
@@ -50,11 +52,27 @@ public class Dieta {
         this.autor = autor;
     }
 
-    public String getDieta() {
-        return dieta;
+    public String getManha() {
+        return manha;
     }
 
-    public void setDieta(String dieta) {
-        this.dieta = dieta;
+    public void setManha(String manha) {
+        this.manha = manha;
+    }
+
+    public String getTarde() {
+        return tarde;
+    }
+
+    public void setTarde(String tarde) {
+        this.tarde = tarde;
+    }
+
+    public String getNoite() {
+        return noite;
+    }
+
+    public void setNoite(String noite) {
+        this.noite = noite;
     }
 }
